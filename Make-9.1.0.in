@@ -1,7 +1,6 @@
 GCCMAJOR := $(shell ${CXX} -dumpversion | cut -d"." -f1)
 GCCMINOR := $(shell ${CXX} -dumpversion | cut -d"." -f2)
 MACHINE  := $(shell ${CXX} -dumpmachine)
-RELEASE_STRING := $(shell git describe --dirty >/dev/null 2>&1)
 
 TANGO_DIR := /usr/local/tango-9.1.0
 OMNIORB_DIR := /usr/local/omniorb-4.2.0
@@ -46,7 +45,7 @@ release debug: bin/$(NAME_SRV)
 #-----------------------------------------
 CXXFLAGS += -D__linux__ -D__OSVERSION__=2 -pedantic -Wall \
 	-Wno-non-virtual-dtor -Wno-long-long -DOMNI_UNLOADABLE_STUBS \
-	$(INC_DIR) -Isrc -D'RELEASE_STRING="$(RELEASE_STRING)"'
+	$(INC_DIR) -Isrc
 ifeq ($(GCCMAJOR),4)
     CXXFLAGS += -Wextra
 endif
